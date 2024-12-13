@@ -27,7 +27,7 @@
 | item   | references | null: false, foreign_key: true | 商品ID (itemsテーブルとの関連付け) |
 
 
-配送先テーブル (shipping)
+配送先テーブル (shippings)
 ### Association
 
 * belongs_to :order
@@ -47,15 +47,15 @@
 
 * has_one :order
 * belongs_to :user
-| Column           | Type       | Options           | 説明 |
-|------------------|------------|-------------------|---|
-| user             | references | foreign_key: true | ユーザーID (usersテーブルとの関連付け) |
-| item_name        | string     | null: false       | 商品名 |
-| description      | text       | null: false       | 商品説明 |
-| category_id      | integer    | foreign_key: true | カテゴリーID (カテゴリーマスタテーブルとの関連付け) |
-| status_id        | integer    | null: false       | 商品状態ID (商品状態マスタテーブルとの関連付け) |
-| shipping_cost_id | integer    | null: false       | 送料ID (送料マスタテーブルとの関連付け) |
-| prefecture_id    | integer    | null: false       | 出荷元都道府県ID (都道府県マスタテーブルとの関連付け) |
-| shipping_date_id | integer    | null: false       | 出荷日ID (出荷日マスタテーブルとの関連付け) |
-| price            | integer    | null: false       | 価格 |
+| Column           | Type       | Options                        | 説明 |
+|------------------|------------|--------------------------------|---|
+| user             | references | null: false, foreign_key: true | ユーザーID (usersテーブルとの関連付け) |
+| item_name        | string     | null: false                    | 商品名 |
+| description      | text       | null: false                    | 商品説明 |
+| category_id      | integer    | null: false                    | カテゴリーID (カテゴリーマスタテーブルとの関連付け) |
+| status_id        | integer    | null: false                    | 商品状態ID (商品状態マスタテーブルとの関連付け) |
+| shipping_cost_id | integer    | null: false                    | 送料ID (送料マスタテーブルとの関連付け) |
+| prefecture_id    | integer    | null: false                    | 出荷元都道府県ID (都道府県マスタテーブルとの関連付け) |
+| shipping_date_id | integer    | null: false                    | 出荷日ID (出荷日マスタテーブルとの関連付け) |
+| price            | integer    | null: false                    | 価格 |
 
