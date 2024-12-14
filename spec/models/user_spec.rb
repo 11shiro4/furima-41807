@@ -1,12 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  describe 'ユーザー新規登録' do
-    before do
-      @user = User.new(nickname: '', email: 'test@example', password: '000000', password_confirmation: '000000', last_name: '',
-                       first_name: '', last_name_kana: '', first_name_kana: '', birthday: '')
-    end
+  before do
+    @user = FactoryBot.build(:user)
+  end
 
+  describe 'ユーザー新規登録' do
     it 'emailが空では登録できない' do
       @user.email = ''
       @user.valid?
