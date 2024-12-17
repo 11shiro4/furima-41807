@@ -95,13 +95,9 @@ GEM
       railties (>= 4.1.0)
       responders
       warden (~> 1.2.3)
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
+
     diff-lcs (1.5.1)
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
+
     erubi (1.13.0)
     factory_bot (6.5.0)
       activesupport (>= 5.0.0)
