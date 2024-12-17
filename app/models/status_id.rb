@@ -1,4 +1,4 @@
-class SalesStatus < ActiveHash::Base
+class StatusId < ActiveHash::Base
   self.data = [
     { id: 1, name: '---' },
     { id: 2, name: '新品・未使用' },
@@ -11,7 +11,4 @@ class SalesStatus < ActiveHash::Base
 
   include ActiveHash::Associations
   has_many :items
-
-  validates :id, :name, presence: true
-  validates :genre_id, numericality: { other_than: 1 , message: "can't be blank"}
 end
