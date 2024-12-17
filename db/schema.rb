@@ -11,12 +11,16 @@
 # It's strongly recommended that you check this file into your version control system.
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+=======
+>>>>>>> Stashed changes
 ActiveRecord::Schema[7.0].define(version: 2024_12_14_023848) do
   create_table "items", charset: "utf8mb3", force: :cascade do |t|
     t.string "name"
     t.text "description"
     t.integer "price"
     t.bigint "user_id", null: false
+<<<<<<< Updated upstream
 =======
 ActiveRecord::Schema[7.0].define(version: 2024_12_16_142930) do
   create_table "items", charset: "utf8mb3", force: :cascade do |t|
@@ -30,11 +34,14 @@ ActiveRecord::Schema[7.0].define(version: 2024_12_16_142930) do
     t.integer "shipping_date_id", null: false
     t.integer "price", null: false
 >>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_items_on_user_id"
   end
 
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
 =======
   create_table "shippings", charset: "utf8mb3", force: :cascade do |t|
@@ -46,6 +53,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_12_16_142930) do
     t.index ["user_id"], name: "index_shippings_on_user_id"
   end
 
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
   create_table "users", charset: "utf8mb3", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -67,8 +76,11 @@ ActiveRecord::Schema[7.0].define(version: 2024_12_16_142930) do
 
   add_foreign_key "items", "users"
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 =======
   add_foreign_key "shippings", "items"
   add_foreign_key "shippings", "users"
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 end
