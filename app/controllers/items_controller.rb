@@ -2,6 +2,7 @@ class ItemsController < ApplicationController
   def index
   end
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 =======
 
   def create
@@ -9,5 +10,7 @@ class ItemsController < ApplicationController
 
   def new
   end
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 end

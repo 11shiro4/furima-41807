@@ -10,17 +10,43 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< Updated upstream
 ActiveRecord::Schema[7.0].define(version: 2024_12_14_023848) do
   create_table "items", charset: "utf8mb3", force: :cascade do |t|
     t.string "name"
     t.text "description"
     t.integer "price"
     t.bigint "user_id", null: false
+=======
+ActiveRecord::Schema[7.0].define(version: 2024_12_16_142930) do
+  create_table "items", charset: "utf8mb3", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "item_name", null: false
+    t.text "description", null: false
+    t.integer "category_id", null: false
+    t.integer "status_id", null: false
+    t.integer "shipping_cost_id", null: false
+    t.integer "prefecture_id", null: false
+    t.integer "shipping_date_id", null: false
+    t.integer "price", null: false
+>>>>>>> Stashed changes
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_items_on_user_id"
   end
 
+<<<<<<< Updated upstream
+=======
+  create_table "shippings", charset: "utf8mb3", force: :cascade do |t|
+    t.bigint "item_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["item_id"], name: "index_shippings_on_item_id"
+    t.index ["user_id"], name: "index_shippings_on_user_id"
+  end
+
+>>>>>>> Stashed changes
   create_table "users", charset: "utf8mb3", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -40,4 +66,9 @@ ActiveRecord::Schema[7.0].define(version: 2024_12_14_023848) do
   end
 
   add_foreign_key "items", "users"
+<<<<<<< Updated upstream
+=======
+  add_foreign_key "shippings", "items"
+  add_foreign_key "shippings", "users"
+>>>>>>> Stashed changes
 end

@@ -4,10 +4,16 @@ one:
   name: MyString
   description: MyText
   price: 1
+<<<<<<< Updated upstream
   user: one
+=======
+>>>>>>> Stashed changes
 
 two:
   name: MyString
   description: MyText
   price: 1
+<<<<<<< Updated upstream
   user: two
+=======
+>>>>>>> Stashed changes

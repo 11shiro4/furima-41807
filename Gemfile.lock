@@ -95,7 +95,10 @@ GEM
       railties (>= 4.1.0)
       responders
       warden (~> 1.2.3)
+<<<<<<< Updated upstream
     diff-lcs (1.5.1)
+=======
+>>>>>>> Stashed changes
     erubi (1.13.0)
     factory_bot (6.5.0)
       activesupport (>= 5.0.0)
@@ -300,8 +303,11 @@ DEPENDENCIES
   capybara
   debug
   devise
+<<<<<<< Updated upstream
   factory_bot_rails
   faker
+=======
+>>>>>>> Stashed changes
   importmap-rails
   jbuilder
   mysql2 (~> 0.5)
