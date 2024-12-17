@@ -1,9 +1,9 @@
 class Item < ApplicationRecord
   belongs_to :category
-  belongs_to :condition
-  belongs_to :shipping_fee
+  belongs_to :status
+  belongs_to :shipping_cost
   belongs_to :prefecture
-  belongs_to :schedule_deliver
+  belongs_to :shipping_date
 
   validates :name, presence: true, length: { maximum: 40 }
   validates :description, presence: true, length: { maximum: 1000 }
