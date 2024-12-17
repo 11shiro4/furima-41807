@@ -306,14 +306,10 @@ DEPENDENCIES
   capybara
   debug
   devise
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
+
   factory_bot_rails
   faker
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
+
   importmap-rails
   jbuilder
   mysql2 (~> 0.5)
