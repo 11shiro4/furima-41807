@@ -8,24 +8,14 @@ class ItemsController < ApplicationController
     render 'new'
   end
 
-  # def create
-  #   @item = Item.new(item_params)
-  #  @item.user = current_user
-  #  if @item.save
-  #     redirect_to root_path
-  #   else
-  #     render :new
-  #   end
-  # end
-
   def create
     @item = Item.new(item_params)
-    if @item.save
-      respond_to do |format|
-        format.html { redirect_to @item }
-      end
-    else
-      respond_to do |format|
+    @item.user = current_user
+
+    respond_to do |format|
+      if @item.save
+        format.html { redirect_to root_path }
+      else
         format.html { render :new, status: :unprocessable_entity }
       end
     end
