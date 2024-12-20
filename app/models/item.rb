@@ -15,8 +15,4 @@ class Item < ApplicationRecord
                     numericality: { only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999 },
                     format: { with: /\A[0-9]+\z/, message: 'は半角数字のみで入力してください' }
   validates :category_id, :status_id, :shipping_cost_id, :prefecture_id, :shipping_date_id, :image, presence: true
-
-  def sold_out?
-    sold == true
-  end
 end
