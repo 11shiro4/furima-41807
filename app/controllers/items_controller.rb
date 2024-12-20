@@ -13,6 +13,23 @@ class ItemsController < ApplicationController
     @item = Item.find(params[:id])
   end
 
+  def edit
+    @item = Item.find(params[:id])
+    @categories = Category.all
+    @sales_statuses = Status.all # ここで@sales_statusesを正しく設定する
+    @shipping_fee_statuses = ShippingCost.all
+    @prefectures = Prefecture.all
+    @scheduled_deliveries = ShippingDate.all
+  end
+
+  def update
+    if @item.update(item_params)
+      redirect_to @item
+    else
+      render :edit
+    end
+  end
+
   def create
     @item = Item.new(item_params)
     @item.user = current_user
