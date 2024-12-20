@@ -17,6 +17,6 @@ class Item < ApplicationRecord
   validates :category_id, :status_id, :shipping_cost_id, :prefecture_id, :shipping_date_id, :image, presence: true
 
   def sold_out?
-    self.sold == true
+    sold == true
   end
 end
