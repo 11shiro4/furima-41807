@@ -2,7 +2,7 @@ class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:edit, :update]
   before_action :set_item, only: [:edit, :update]
   before_action :redirect_if_sold_out, only: [:edit, :update]
-  before_action :set_form_collections, only: [:edit, :update]
+  before_action :set_form_collections, only: [:show, :edit, :update]
   def index
     @items = Item.all.order(created_at: :desc)
   end
@@ -13,20 +13,15 @@ class ItemsController < ApplicationController
   end
 
   def show
-    @item = Item.find(params[:id])
   end
 
   def edit
-    set_item
-    set_form_collections
   end
 
   def update
-    @item = Item.find(params[:id])
     if @item.update(item_params)
       redirect_to @item
     else
-      set_form_collections
       render :edit, status: :unprocessable_entity
     end
   end
@@ -59,7 +54,7 @@ class ItemsController < ApplicationController
   end
 
   def redirect_if_sold_out
-    return unless @item&.sold_out? || @item&.user != current_user
+    return unless @item.user != current_user
 
     redirect_to root_path
   end
