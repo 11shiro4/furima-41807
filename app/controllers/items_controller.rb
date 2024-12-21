@@ -27,7 +27,7 @@ class ItemsController < ApplicationController
       redirect_to @item
     else
       set_form_collections
-      render :edit
+      render :edit, status: :unprocessable_entity
     end
   end
 
