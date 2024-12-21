@@ -1,6 +1,7 @@
 class ItemsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create]
+  before_action :authenticate_user!, only: [:edit, :update]
   before_action :set_item, only: [:edit, :update]
+  before_action :redirect_if_sold_out, only: [:edit, :update]
 
   def index
     @items = Item.all.order(created_at: :desc)
@@ -18,13 +19,14 @@ class ItemsController < ApplicationController
   def edit
     @item = Item.find(params[:id])
     @categories = Category.all
-    @sales_statuses = Status.all # ここで@sales_statusesを正しく設定する
-    @shipping_fee_statuses = ShippingCost.all
+    @statuses = Status.all
+    @shipping_costs = ShippingCost.all
     @prefectures = Prefecture.all
-    @scheduled_deliveries = ShippingDate.all
+    @shipping_dates = ShippingDate.all
   end
 
   def update
+    @item = Item.find(params[:id])
     if @item.update(item_params)
       redirect_to @item
     else
@@ -49,6 +51,12 @@ class ItemsController < ApplicationController
 
   def set_item
     @item = Item.find(params[:id])
+  end
+
+  def redirect_if_sold_out
+    return unless @item.sold_out? || @item.user != current_user
+
+    redirect_to root_path
   end
 
   def item_params

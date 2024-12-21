@@ -55,7 +55,7 @@ app/assets/stylesheets/items/new.css %>
           商品の状態
           <span class="indispensable">必須</span>
         </div>
-        <%= f.collection_select(:sales_status_id, @sales_statuses, :id, :name, {prompt: '---'}, {class:"select-box", id:"item-sales-status"}) %>
+        <%= f.collection_select(:status_id, @statuses, :id, :name, {prompt: '---'}, {class:"select-box", id:"item-status"}) %>
       </div>
     </div>
     <%# /商品の詳細 %>
@@ -71,7 +71,7 @@ app/assets/stylesheets/items/new.css %>
           配送料の負担
           <span class="indispensable">必須</span>
         </div>
-        <%= f.collection_select(:shipping_fee_status_id, @shipping_fee_statuses, :id, :name, {prompt: '---'}, {class:"select-box", id:"item-shipping-fee-status"}) %>
+        <%= f.collection_select(:shipping_cost_id, @shipping_costs, :id, :name, {prompt: '---'}, {class:"select-box", id:"item-shipping-cost"}) %>
         <div class="weight-bold-text">
           発送元の地域
           <span class="indispensable">必須</span>
@@ -81,7 +81,7 @@ app/assets/stylesheets/items/new.css %>
           発送までの日数
           <span class="indispensable">必須</span>
         </div>
-        <%= f.collection_select(:scheduled_delivery_id, @scheduled_deliveries, :id, :name, {prompt: '---'}, {class:"select-box", id:"item-scheduled-delivery"}) %>
+        <%= f.collection_select(:shipping_date_id, @shipping_dates, :id, :name, {prompt: '---'}, {class:"select-box", id:"item-shipping-date"}) %>
       </div>
     </div>
     <%# /配送について %>
