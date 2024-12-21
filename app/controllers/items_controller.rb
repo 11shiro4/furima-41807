@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
-  before_action :authenticate_user!, only: [:edit, :update]
-  before_action :set_item, only: [:edit, :update]
+  before_action :authenticate_user!, only: [:edit, :update, :destroy]
+  before_action :set_item, only: [:show, :edit, :update, :destroy]
   before_action :redirect_if_sold_out, only: [:edit, :update]
   before_action :set_form_collections, only: [:show, :edit, :update]
   def index
