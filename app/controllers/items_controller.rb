@@ -3,7 +3,6 @@ class ItemsController < ApplicationController
   before_action :set_item, only: [:edit, :update]
   before_action :redirect_if_sold_out, only: [:edit, :update]
   before_action :set_form_collections, only: [:edit, :update]
-
   def index
     @items = Item.all.order(created_at: :desc)
   end
@@ -18,12 +17,8 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    @item = Item.find(params[:id])
-    @categories = Category.all
-    @statuses = Status.all
-    @shipping_costs = ShippingCost.all
-    @prefectures = Prefecture.all
-    @shipping_dates = ShippingDate.all
+    set_item
+    set_form_collections
   end
 
   def update
@@ -31,6 +26,7 @@ class ItemsController < ApplicationController
     if @item.update(item_params)
       redirect_to @item
     else
+      set_form_collections
       render :edit
     end
   end
@@ -63,7 +59,7 @@ class ItemsController < ApplicationController
   end
 
   def redirect_if_sold_out
-    return unless @item.sold_out? || @item.user != current_user
+    return unless @item&.sold_out? || @item&.user != current_user
 
     redirect_to root_path
   end
