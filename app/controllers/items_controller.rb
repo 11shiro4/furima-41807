@@ -2,6 +2,7 @@ class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:edit, :update]
   before_action :set_item, only: [:edit, :update]
   before_action :redirect_if_sold_out, only: [:edit, :update]
+  before_action :set_form_collections, only: [:edit, :update]
 
   def index
     @items = Item.all.order(created_at: :desc)
@@ -51,6 +52,14 @@ class ItemsController < ApplicationController
 
   def set_item
     @item = Item.find(params[:id])
+  end
+
+  def set_form_collections
+    @categories = Category.all
+    @statuses = Status.all
+    @shipping_costs = ShippingCost.all
+    @prefectures = Prefecture.all
+    @shipping_dates = ShippingDate.all
   end
 
   def redirect_if_sold_out
