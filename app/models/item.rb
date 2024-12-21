@@ -2,6 +2,10 @@ class Item < ApplicationRecord
   belongs_to :user
   has_one_attached :image
 
+  def sold_out?
+    sold.present?
+  end
+
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to_active_hash :category
   belongs_to_active_hash :status
@@ -14,5 +18,10 @@ class Item < ApplicationRecord
   validates :price, presence: true,
                     numericality: { only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999 },
                     format: { with: /\A[0-9]+\z/, message: 'は半角数字のみで入力してください' }
-  validates :category_id, :status_id, :shipping_cost_id, :prefecture_id, :shipping_date_id, :image, presence: true
+  validates :category_id, numericality: { other_than: 1 }
+  validates :status_id, numericality: { other_than: 1 }
+  validates :shipping_cost_id, numericality: { other_than: 1 }
+  validates :prefecture_id, numericality: { other_than: 1 }
+  validates :shipping_date_id, numericality: { other_than: 1 }
+  validates :image, presence: true
 end

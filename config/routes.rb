@@ -3,4 +3,8 @@ Rails.application.routes.draw do
   resources :users
   resources :items
   root to:"items#index"
+
+  resources :items do
+    get 'purchase', on: :member
+  end
 end
