@@ -7,6 +7,6 @@ Rails.application.routes.draw do
   root to:"items#index"
 
   resources :items do
-    get 'purchase', on: :member
+    resources :orders, only: [:index, :create]
   end
 end

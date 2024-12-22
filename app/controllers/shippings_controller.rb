@@ -42,6 +42,6 @@ class ShippingsController < ApplicationController
   private
 
   def shipping_params
-    params.require(:order).permit(:postcode, :prefecture_id, :city, :block, :building, :phone_number)
+    params.require(:shipping).permit(:postcode, :prefecture_id, :city, :block, :building, :phone_number)
   end
 end

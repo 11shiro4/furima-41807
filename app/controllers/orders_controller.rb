@@ -13,7 +13,7 @@ class OrdersController < ApplicationController
     if @order.save
       redirect_to root_path
     else
-      render :new
+      render :index
     end
   end
 
@@ -24,6 +24,6 @@ class OrdersController < ApplicationController
   end
 
   def order_params
-    params.require(:order).permit(:user, :item)
+    params.require(:order).permit(:user_id, :item_id)
   end
 end
