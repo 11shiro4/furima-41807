@@ -29,7 +29,7 @@ class ShippingsController < ApplicationController
     if @shipping.update(shipping_params)
       redirect_to @shipping
     else
-      render :edit
+      render :edit, status: :unprocessable_entity
     end
   end
 
