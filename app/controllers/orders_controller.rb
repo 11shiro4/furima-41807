@@ -13,7 +13,7 @@ class OrdersController < ApplicationController
     if @order.save
       redirect_to root_path
     else
-      render :index
+      render :new
     end
   end
 
@@ -24,6 +24,6 @@ class OrdersController < ApplicationController
   end
 
   def order_params
-    params.require(:order).permit(:attribute1, :attribute2) # 必要な注文情報の属性を追加
+    params.require(:order).permit(:user, :item)
   end
 end
