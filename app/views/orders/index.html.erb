@@ -31,7 +31,7 @@
     </div>
     <%# /支払額の表示 %>
 
-    <%= form_with id: 'charge-form', class: 'transaction-form-wrap',local: true do |f| %>
+    <%= form_with model: @order, id: 'charge-form', class: 'transaction-form-wrap', local: true do |f| %>
     <%# カード情報の入力 %>
     <div class='credit-card-form'>
       <h1 class='info-input-haedline'>
@@ -125,3 +125,31 @@
   </div>
 </div>
 <%= render "shared/second-footer"%>
+
+<script src="https://js.pay.jp/v2/pay.js"></script>
+<script>
+  const PAYJP_PUBLIC_KEY = 'your_payjp_public_key'; // PAY.JP公開鍵を設定
+  Payjp.setPublicKey(PAYJP_PUBLIC_KEY);
+
+  const form = document.getElementById('charge-form');
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const card = {
+      number: document.getElementById('number-form').value,
+      cvc: document.getElementById('cvc-form').value,
+      exp_month: document.getElementById('expiry-form').value.split('/')[0],
+      exp_year: document.getElementById('expiry-form').value.split('/')[1]
+    };
+
+    Payjp.createToken(card, (status, response) => {
+      if (status === 200) {
+        const token = response.id;
+        form.insertAdjacentHTML('beforeend', `<input type="hidden" name="payjp_token" value="${token}">`);
+        form.submit();
+      } else {
+        alert('カード情報が正しくありません。');
+      }
+    });
+  });
+</script>
