@@ -9,6 +9,7 @@ class OrdersController < ApplicationController
 
   def new
     @item = Item.find(params[:item_id])
+    gon.public_key = ENV["PAYJP_PUBLIC_KEY"]
   end
 
   def create
