@@ -1,6 +1,8 @@
 class OrdersController < ApplicationController
   before_action :set_item, only: [:index, :create]
   before_action :authenticate_user!, only: [:index, :create]
+  before_action :redirect_if_invalid_access, only: [:index, :create]
+
   def index
     @order = Order.new
   end
@@ -26,13 +28,18 @@ class OrdersController < ApplicationController
   private
 
   def charge_customer(token:, amount:)
-    item = Item.find(@order.item_id)
-    Stripe::Charge.create({
-                            amount: item.price,
-                            currency: 'jpy',
-                            description: '購入商品の説明',
-                            source: token
-                          })
+    Payjp.api_key = ENV['PAYJP_SECRET_KEY']
+    Payjp::Charge.create(
+      amount: amount,
+      card: token,
+      currency: 'jpy'
+    )
+  end
+
+  def redirect_if_invalid_access
+    return unless @item.user_id == current_user.id || @item.orders.exists?
+
+    redirect_to root_path
   end
 
   def set_item
