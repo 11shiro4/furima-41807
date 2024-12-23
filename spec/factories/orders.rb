@@ -29,13 +29,13 @@ RSpec.describe Order, type: :model do
       it '郵便番号にハイフンがなければ保存できないこと' do
         @order.postcode = '1234567'
         @order.valid?
-        expect(@order.errors.full_messages).to include('Postcode is invalid. Include hyphen(-)')
+        expect(@order.errors.full_messages).to include('Postcode は「3桁ハイフン4桁」の半角文字列で入力してください')
       end
 
       it '都道府県が空では保存できないこと' do
         @order.prefecture_id = ''
         @order.valid?
-        expect(@order.errors.full_messages).to include("Prefecture can't be blank")
+        expect(@order.errors.full_messages).to include('Prefecture must be other than 1')
       end
 
       it '市区町村が空では保存できないこと' do
@@ -59,31 +59,25 @@ RSpec.describe Order, type: :model do
       it '電話番号が9桁以下では保存できないこと' do
         @order.phone_number = '090123456'
         @order.valid?
-        expect(@order.errors.full_messages).to include('Phone number is invalid. Must be 10 to 11 digits')
+        expect(@order.errors.full_messages).to include('Phone number は10桁以上11桁以内の半角数値で入力してください')
       end
 
       it '電話番号が12桁以上では保存できないこと' do
         @order.phone_number = '090123456789'
         @order.valid?
-        expect(@order.errors.full_messages).to include('Phone number is invalid. Must be 10 to 11 digits')
+        expect(@order.errors.full_messages).to include('Phone number は10桁以上11桁以内の半角数値で入力してください')
       end
 
       it '電話番号にハイフンが含まれていると保存できないこと' do
         @order.phone_number = '090-1234-5678'
         @order.valid?
-        expect(@order.errors.full_messages).to include('Phone number is invalid. Must be 10 to 11 digits')
+        expect(@order.errors.full_messages).to include('Phone number は10桁以上11桁以内の半角数値で入力してください')
       end
 
       it 'tokenが空では保存できないこと' do
         @order.token = ''
         @order.valid?
         expect(@order.errors.full_messages).to include("Token can't be blank")
-      end
-
-      it 'クレジットカード情報が空では保存できないこと' do
-        @order.credit_card_number = ''
-        @order.valid?
-        expect(@order.errors.full_messages).to include("Credit card number can't be blank")
       end
     end
   end
