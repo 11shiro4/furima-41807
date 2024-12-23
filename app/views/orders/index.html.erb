@@ -14,7 +14,7 @@
         </h2>
         <div class='buy-item-price'>
           <p class='item-price-text'>¥<%= @item.price.to_s(:delimited) %></p>
-          <p class='item-price-sub-text'><%= @item.shipping_cost %></p>
+          <p class='item-price-sub-text'><%= @item.shipping_cost.name %></p>
         </div>
       </div>
     </div>
