@@ -1,11 +1,16 @@
 const pay = () => {
   console.log("OK");
-  const publicKey = gon.public_key
+  const payjp = Payjp("pk_test_57e8e3d0c1b46cf341aaea64");
 
   const token = response.id;
   const renderDom = document.getElementById("charge-form");
   const tokenObj = `<input value=${token} type="hidden" name='token'>`;
   renderDom.insertAdjacentHTML("beforeend", tokenObj);
+
+    numberElement.clear();
+    expiryElement.clear();
+    cvcElement.clear();
+    document.getElementById("charge-form").submit();
 };
 
 window.addEventListener("turbo:load", pay);

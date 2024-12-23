@@ -9,11 +9,12 @@ class OrdersController < ApplicationController
 
   def new
     @item = Item.find(params[:item_id])
-    gon.public_key = ENV["PAYJP_PUBLIC_KEY"]
+    gon.public_key = ENV['PAYJP_PUBLIC_KEY']
   end
 
   def create
     @order = Order.new(order_params.merge(user_id: current_user.id, item_id: params[:item_id]))
+
     @order.user_id = current_user.id
     @order.item_id = params[:item_id]
 
