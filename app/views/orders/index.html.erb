@@ -1,7 +1,5 @@
 <%= render "shared/second-header"%>
 
-<%= include_gon %>
-
 <div class='transaction-contents'>
   <div class='transaction-main'>
     <h1 class='transaction-title-text'>
@@ -134,7 +132,7 @@
 document.addEventListener('DOMContentLoaded', function() {
     Payjp.setPublicKey('<%= ENV["PAYJP_PUBLIC_KEY"] %>');
 
-    const form = document.getElementById('order_form');
+    const form = document.getElementById('charge-form');
     form.addEventListener('submit', function(e) {
         e.preventDefault();
 
