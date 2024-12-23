@@ -10,12 +10,12 @@ class OrdersController < ApplicationController
   end
 
   def create
-    @order = Order.new(order_params)
+    @order = Order.new(order_params.merge(user_id: current_user.id, item_id: params[:item_id]))
     @order.user_id = current_user.id
     @order.item_id = params[:item_id]
 
     if @order.valid?
-      charge_customer(token: params[:stripeToken])
+      charge_customer(token: params[:order][:token], amount: @item.price)
       @order.save
       redirect_to root_path
     else
@@ -25,7 +25,7 @@ class OrdersController < ApplicationController
 
   private
 
-  def charge_customer(token:)
+  def charge_customer(token:, amount:)
     item = Item.find(@order.item_id)
     Stripe::Charge.create({
                             amount: item.price,
