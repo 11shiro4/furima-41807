@@ -4,7 +4,7 @@ class Item < ApplicationRecord
   has_many :orders
 
   def sold_out?
-    sold.present?
+    order.present?
   end
 
   extend ActiveHash::Associations::ActiveRecordExtensions
