@@ -2,9 +2,10 @@ class Item < ApplicationRecord
   belongs_to :user
   has_one_attached :image
   has_many :orders
+  has_one :purchase_record, class_name: 'Order'
 
   def sold_out?
-    order.present?
+    sold.present?
   end
 
   extend ActiveHash::Associations::ActiveRecordExtensions

@@ -8,6 +8,6 @@ Rails.application.routes.draw do
 
   resources :items do
     root to: 'orders#index'
-    resources :orders, only:[:create]
+    resources :orders, only: [:create, :index]
   end
 end

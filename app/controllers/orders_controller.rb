@@ -5,13 +5,17 @@ class OrdersController < ApplicationController
     @order = Order.new
   end
 
+  def new
+    @item = Item.find(params[:item_id])
+  end
+
   def create
-    @order_form = OrderForm.new(order_form_params)
-    if @order_form.valid?
-      @order_form.save
+    @order = Order.new(order_params)
+    if @order.valid?
+      @order.save
       redirect_to root_path
     else
-      render :new
+      render 'index', status: :unprocessable_entity
     end
   end
 
