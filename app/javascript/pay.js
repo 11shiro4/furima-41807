@@ -1,6 +1,7 @@
 const pay = () => {
   console.log("OK");
   const payjp = Payjp("pk_test_57e8e3d0c1b46cf341aaea64");
+  // const publicKey = gon.public_key
 
   const form = document.getElementById("charge-form");
 
@@ -17,7 +18,6 @@ const pay = () => {
       numberElement.clear();
       expiryElement.clear();
       cvcElement.clear();
-
       document.getElementById("charge-form").submit();
     }
   });
