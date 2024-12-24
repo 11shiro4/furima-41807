@@ -5,6 +5,7 @@ class OrdersController < ApplicationController
   before_action :set_payjp_public_key, only: [:index, :new]
 
   def index
+    gon.public_key = ENV['PAYJP_PUBLIC_KEY']
     @order = Order.new
   end
 
@@ -16,14 +17,16 @@ class OrdersController < ApplicationController
   def create
     @order = Order.new(order_params.merge(user_id: current_user.id, item_id: params[:item_id]))
 
-    @order.user_id = current_user.id
-    @order.item_id = params[:item_id]
+    # @order.user_id = current_user.id
+    # @order.item_id = params[:item_id]
 
     if @order.valid?
       charge_customer(token: params[:order][:token], amount: @item.price)
       @order.save
       redirect_to root_path
     else
+      Rails.logger.debug("Order validation errors: #{@order.errors.full_messages.join(', ')}") # バリデーションエラーの出力
+      gon.public_key = ENV['PAYJP_PUBLIC_KEY']
       render 'index', status: :unprocessable_entity
     end
   end
@@ -54,7 +57,8 @@ class OrdersController < ApplicationController
   end
 
   def order_params
-    params.require(:order).permit(:postcode, :prefecture_id, :city, :block, :building, :phone_number).merge(token: params[:token])
+    params.require(:order).permit(:postcode, :prefecture_id, :city, :block, :building,
+                                  :phone_number).merge(token: params[:token])
   end
 
   def order_form_params
