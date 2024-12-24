@@ -15,17 +15,15 @@ class OrdersController < ApplicationController
   end
 
   def create
-    @order = Order.new(order_params.merge(user_id: current_user.id, item_id: params[:item_id]))
-
-    # @order.user_id = current_user.id
-    # @order.item_id = params[:item_id]
+    @order = Order.new(order_params)
 
     if @order.valid?
-      charge_customer(token: params[:order][:token], amount: @item.price)
+      token = params[:token] # トークンパラメータの取得
+      charge_customer(token: token, amount: @item.price)
       @order.save
       redirect_to root_path
     else
-      Rails.logger.debug("Order validation errors: #{@order.errors.full_messages.join(', ')}") # バリデーションエラーの出力
+      Rails.logger.debug("Order validation errors: #{@order.errors.full_messages.join(', ')}") # バリデーションエラーをログ出力
       gon.public_key = ENV['PAYJP_PUBLIC_KEY']
       render 'index', status: :unprocessable_entity
     end
@@ -57,13 +55,10 @@ class OrdersController < ApplicationController
   end
 
   def order_params
-    params.require(:order).permit(:postcode, :prefecture_id, :city, :block, :building,
-                                  :phone_number).merge(token: params[:token])
-  end
-
-  def order_form_params
-    params.require(:order_form).permit(:postcode, :prefecture_id, :city, :block, :building, :phone_number, :token).merge(
-      user_id: current_user.id, item_id: params[:item_id]
+    params.require(:order).permit(:postcode, :prefecture_id, :city, :block, :building, :phone_number).merge(
+      token: params[:token],
+      user_id: current_user.id,
+      item_id: params[:item_id]
     )
   end
 end
