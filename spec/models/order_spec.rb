@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Order, type: :model do
   before do
-    @order = FactoryBot.build(:order)
+    @order = FactoryBot.build(:order, credit_card_number: '1234567812345678') # クレジットカード情報を追加
   end
 
   describe '注文の保存' do
@@ -30,10 +30,10 @@ RSpec.describe Order, type: :model do
         expect(@order.errors.full_messages).to include('Postcode は「3桁ハイフン4桁」の半角文字列で入力してください')
       end
 
-      it '都道府県が空では保存できないこと' do
+      it '都道府県が1以外でないと保存できないこと' do
         @order.prefecture_id = 1
         @order.valid?
-        expect(@order.errors.full_messages).to include("Prefecture can't be blank")
+        expect(@order.errors.full_messages).to include('Prefecture must be other than 1')
       end
 
       it '市区町村が空では保存できないこと' do
@@ -63,13 +63,13 @@ RSpec.describe Order, type: :model do
       it '電話番号が12桁以上では保存できないこと' do
         @order.phone_number = '090123456789'
         @order.valid?
-        expect(@order.errors.full_messages).to include('Phone number is invalid. Must be 10 to 11 digits')
+        expect(@order.errors.full_messages).to include('Phone number は10桁以上11桁以内の半角数値で入力してください')
       end
 
       it '電話番号にハイフンが含まれていると保存できないこと' do
         @order.phone_number = '090-1234-5678'
         @order.valid?
-        expect(@order.errors.full_messages).to include('Phone number is invalid. Must be 10 to 11 digits')
+        expect(@order.errors.full_messages).to include('Phone number は10桁以上11桁以内の半角数値で入力してください')
       end
 
       it 'tokenが空では保存できないこと' do

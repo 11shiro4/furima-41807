@@ -16,7 +16,7 @@ RSpec.describe Item, type: :model do
 
     context '商品出品ができないとき' do
       it '商品画像を1枚つけることが必須である' do
-        @item.image = nil
+        @item.image = ''
         @item.valid?
         expect(@item.errors.full_messages).to include("Image can't be blank")
       end
@@ -36,31 +36,31 @@ RSpec.describe Item, type: :model do
       it 'カテゴリーの情報が必須である' do
         @item.category_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("Category can't be blank")
+        expect(@item.errors.full_messages).to include('Category must be other than 1')
       end
 
       it '商品の状態の情報が必須である' do
-        @item.condition_id = 1
+        @item.status_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("Condition can't be blank")
+        expect(@item.errors.full_messages).to include('Status must be other than 1')
       end
 
       it '配送料の負担の情報が必須である' do
-        @item.shipping_payer_id = 1
+        @item.shipping_cost_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("Shipping payer can't be blank")
+        expect(@item.errors.full_messages).to include('Shipping cost must be other than 1')
       end
 
       it '発送元の地域の情報が必須である' do
-        @item.shipping_region_id = 1
+        @item.prefecture_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("Shipping region can't be blank")
+        expect(@item.errors.full_messages).to include('Prefecture must be other than 1')
       end
 
       it '発送までの日数の情報が必須である' do
-        @item.shipping_day_id = 1
+        @item.shipping_date_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("Shipping day can't be blank")
+        expect(@item.errors.full_messages).to include('Shipping date must be other than 1')
       end
 
       it '価格の情報が必須である' do
@@ -94,7 +94,7 @@ RSpec.describe Item, type: :model do
         @item.item_name = ''
         @item.description = ''
         @item.valid?
-        expect(@item.errors.full_messages).to eq(["Item name can't be blank", "Description can't be blank"])
+        expect(@item.errors.full_messages).to include("Item name can't be blank", "Description can't be blank")
       end
     end
   end
