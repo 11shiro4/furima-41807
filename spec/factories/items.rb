@@ -7,7 +7,7 @@ FactoryBot.define do
     shipping_cost_id { ShippingCost.first.id }
     prefecture_id { Prefecture.first.id }
     shipping_date_id { ShippingDate.first.id }
-    price         { 500 }
+    price { 500 }
     association :user
 
     after(:build) do |message|

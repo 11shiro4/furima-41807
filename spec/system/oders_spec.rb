@@ -1,10 +1,8 @@
-require 'rails_helper'
-
 RSpec.describe 'Order', type: :system do
   before do
     @user = FactoryBot.create(:user)
     @item = FactoryBot.create(:item)
-    @order = FactoryBot.build(:order, user_id: @user.id, item_id: @item.id)
+    @order = FactoryBot.build(:order)
     sign_in @user
   end
 

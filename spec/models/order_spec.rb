@@ -2,9 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Order, type: :model do
   before do
-    @user = FactoryBot.create(:user)
-    @item = FactoryBot.create(:item)
-    @order = FactoryBot.build(:order, user_id: @user.id, item_id: @item.id)
+    @order = FactoryBot.build(:order)
   end
 
   describe '注文の保存' do
@@ -29,11 +27,11 @@ RSpec.describe Order, type: :model do
       it '郵便番号にハイフンがなければ保存できないこと' do
         @order.postcode = '1234567'
         @order.valid?
-        expect(@order.errors.full_messages).to include('Postcode is invalid. Include hyphen(-)')
+        expect(@order.errors.full_messages).to include('Postcode は「3桁ハイフン4桁」の半角文字列で入力してください')
       end
 
       it '都道府県が空では保存できないこと' do
-        @order.prefecture_id = ''
+        @order.prefecture_id = 1
         @order.valid?
         expect(@order.errors.full_messages).to include("Prefecture can't be blank")
       end
@@ -59,7 +57,7 @@ RSpec.describe Order, type: :model do
       it '電話番号が9桁以下では保存できないこと' do
         @order.phone_number = '090123456'
         @order.valid?
-        expect(@order.errors.full_messages).to include('Phone number is invalid. Must be 10 to 11 digits')
+        expect(@order.errors.full_messages).to include('Phone number は10桁以上11桁以内の半角数値で入力してください')
       end
 
       it '電話番号が12桁以上では保存できないこと' do
