@@ -20,6 +20,9 @@ class ItemsController < ApplicationController
   end
 
   def edit
+    return unless @item.sold_out? || @item.user_id != current_user.id
+
+    redirect_to root_path
   end
 
   def update
