@@ -5,7 +5,7 @@ class Item < ApplicationRecord
   has_one :purchase_record, class_name: 'Order'
 
   def sold_out?
-    sold.present?
+    @item.nil?
   end
 
   extend ActiveHash::Associations::ActiveRecordExtensions
