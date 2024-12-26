@@ -1,7 +1,21 @@
+document.addEventListener('DOMContentLoaded', function() {
+  pay();
+});
+
+window.addEventListener('turbo:load', function() {
+  pay();
+});
+
+document.addEventListener('turbo:submit-end', function(event) {
+  if (event.detail.success === false) {
+    pay();
+  }
+});
+
 const pay = () => {
   console.log("OK");
-  const payjp = Payjp("pk_test_57e8e3d0c1b46cf341aaea64");
-  // const publicKey = gon.public_key
+  const publicKey = gon.public_key
+  const payjp = Payjp(process.env.PAYJP_PUBLIC_KEY);
   const elements = payjp.elements();
   const numberElement = elements.create('cardNumber');
   const expiryElement = elements.create('cardExpiry');
@@ -17,7 +31,6 @@ const pay = () => {
       if (response.error) {
       } else {
         const token = response.id;
-        console.log(token)
         const renderDom = document.getElementById("charge-form");
         const tokenObj = `<input value=${token} name='token' type="hidden">`;
         renderDom.insertAdjacentHTML("beforeend", tokenObj);
@@ -33,3 +46,5 @@ const pay = () => {
 };
 
 window.addEventListener("turbo:load", pay);
+window.addEventListener("turbo:render", pay);
+

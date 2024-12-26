@@ -17,7 +17,7 @@ class OrdersController < ApplicationController
   def create
     @order = Order.new(order_params)
 
-    if @order.valid?
+    if @order_form.valid?
       token = params[:token] # トークンパラメータの取得
       charge_customer(token: token, amount: @item.price)
       @order.save
@@ -55,7 +55,7 @@ class OrdersController < ApplicationController
   end
 
   def order_params
-    params.require(:order).permit(:postcode, :prefecture_id, :city, :block, :building, :phone_number).merge(
+    params.require(:order_form).permit(:postcode, :prefecture_id, :city, :block, :building, :phone_number).merge(
       token: params[:token],
       user_id: current_user.id,
       item_id: params[:item_id]
