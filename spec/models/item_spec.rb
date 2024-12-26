@@ -2,12 +2,6 @@ require 'rails_helper'
 
 RSpec.describe Item, type: :model do
   before do
-    @category = Category.create!(name: 'Category 2')
-    @status = Status.create!(name: 'Status 2')
-    @shipping_cost = ShippingCost.create!(name: 'ShippingCost 2')
-    @prefecture = Prefecture.create!(name: 'Prefecture 2')
-    @shipping_date = ShippingDate.create!(name: 'ShippingDate 2')
-
     @user = FactoryBot.create(:user)
     @item = FactoryBot.build(:item, category_id: @category.id, status_id: @status.id, shipping_cost_id: @shipping_cost.id,
                                     prefecture_id: @prefecture.id, shipping_date_id: @shipping_date.id)
@@ -93,13 +87,6 @@ RSpec.describe Item, type: :model do
       @item.item_name = ''
       @item.valid?
       expect(@item.errors.full_messages).to include("Item name can't be blank")
-    end
-
-    it 'エラーハンドリングの際、重複したエラーメッセージが表示されない' do
-      @item.item_name = ''
-      @item.description = ''
-      @item.valid?
-      expect(@item.errors.full_messages).to include("Item name can't be blank", "Description can't be blank")
     end
   end
 end

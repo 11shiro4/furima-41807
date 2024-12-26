@@ -12,8 +12,6 @@ document.addEventListener('turbo:submit-end', function(event) {
   }
 });
 
-const pay = () => {
-  console.log("OK");
   const publicKey = gon.public_key
   const payjp = Payjp(process.env.PAYJP_PUBLIC_KEY);
   const elements = payjp.elements();
@@ -43,7 +41,6 @@ const pay = () => {
     });
     e.preventDefault();
   });
-};
 
 window.addEventListener("turbo:load", pay);
 window.addEventListener("turbo:render", pay);
