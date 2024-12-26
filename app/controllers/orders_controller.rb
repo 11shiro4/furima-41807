@@ -39,7 +39,7 @@ class OrdersController < ApplicationController
   end
 
   def redirect_if_invalid_access
-    return unless @item.sold_out? || @item.user_id != current_user.id
+    @item.user_id == current_user.id || @item.orders.exists?
 
     redirect_to root_path
   end
