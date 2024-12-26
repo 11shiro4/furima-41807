@@ -15,7 +15,7 @@ RSpec.describe Item, type: :model do
 
   context '商品出品ができないとき' do
     it '商品画像を1枚つけることが必須である' do
-      @item.image = nil # 画像をnilにすることでバリデーションが働くようにする
+      @item.image = ''
       @item.valid?
       expect(@item.errors.full_messages).to include("Image can't be blank")
     end
