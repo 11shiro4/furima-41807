@@ -96,5 +96,7 @@ gem 'dotenv-rails', groups: [:development, :test]
 
 gem 'gon'
 
-
+group :production do
+  gem 'pg'
+end
 
