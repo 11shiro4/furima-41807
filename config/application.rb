@@ -21,3 +21,9 @@ module Furima41807
     # config.eager_load_paths << Rails.root.join("extras")
   end
 end
+
+module YourApp
+  class Application < Rails::Application
+    Dotenv::Railtie.load
+  end
+end
