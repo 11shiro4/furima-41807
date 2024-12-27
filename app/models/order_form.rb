@@ -3,7 +3,7 @@ class OrderForm
   attr_accessor :postcode, :prefecture_id, :city, :block, :building, :phone_number, :token, :item_id, :user_id
 
   with_options presence: true do
-    validates :postcode, presence: true
+    validates :postcode
     validates :postcode, format: { with: /\A\d{3}-\d{4}\z/, message: 'は「123-4567」の形式で入力してください' }
     validates :phone_number, format: { with: /\A\d{10,11}\z/, message: 'は10桁以上11桁以内の半角数値で入力してください' }
     validates :prefecture_id, numericality: { other_than: 1 }
