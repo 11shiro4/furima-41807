@@ -9,6 +9,8 @@ Bundler.require(*Rails.groups)
 
 module Furima41807
   class Application < Rails::Application
+    require 'dotenv-rails'
+    Dotenv::Railtie.load
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.0
     config.active_storage.variant_processor = :mini_magick
@@ -20,10 +22,5 @@ module Furima41807
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
-  end
-end
-
-module YourApp
-  class Application < Rails::Application
   end
 end
