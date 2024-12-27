@@ -1,4 +1,5 @@
 require_relative "boot"
+require 'dotenv/rails-now'
 
 require "rails/all"
 
@@ -24,6 +25,5 @@ end
 
 module YourApp
   class Application < Rails::Application
-    Dotenv::Railtie.load
   end
 end
