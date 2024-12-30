@@ -1,19 +1,6 @@
-document.addEventListener('DOMContentLoaded', function() {
-  pay();
-});
-
-window.addEventListener('turbo:load', function() {
-  pay();
-});
-
-document.addEventListener('turbo:submit-end', function(event) {
-  if (event.detail.success === false) {
-    pay();
-  }
-});
-
+const pay = () => {
   const publicKey = gon.public_key
-  const payjp = Payjp(process.env.PAYJP_PUBLIC_KEY);
+  const payjp = Payjp(publicKey)
   const elements = payjp.elements();
   const numberElement = elements.create('cardNumber');
   const expiryElement = elements.create('cardExpiry');
@@ -32,7 +19,6 @@ document.addEventListener('turbo:submit-end', function(event) {
         const renderDom = document.getElementById("charge-form");
         const tokenObj = `<input value=${token} name='token' type="hidden">`;
         renderDom.insertAdjacentHTML("beforeend", tokenObj);
-        debugger;
       }
       numberElement.clear();
       expiryElement.clear();
@@ -41,7 +27,7 @@ document.addEventListener('turbo:submit-end', function(event) {
     });
     e.preventDefault();
   });
+};
 
 window.addEventListener("turbo:load", pay);
-window.addEventListener("turbo:render", pay);
-
+window.addEventListener("turbo:render", pay); 
