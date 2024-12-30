@@ -1,7 +1,8 @@
 class Item < ApplicationRecord
-  has_one :order
+  # has_one :orders
   belongs_to :user
   has_one_attached :image
+  has_many :orders
 
   def sold_out?
     Order.exists?(item_id: id)
