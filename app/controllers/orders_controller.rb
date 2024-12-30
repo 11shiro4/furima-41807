@@ -10,12 +10,12 @@ class OrdersController < ApplicationController
   end
 
   def create
-    @order = Order.new(order_params)
+    @order_form = OrderForm.new(order_params)
 
     if @order_form.valid?
       token = params[:token]
       charge_customer(token: token, amount: @item.price)
-      @order.save
+      @order_form.save
       redirect_to root_path
     else
       gon.public_key = ENV['PAYJP_PUBLIC_KEY']
@@ -49,7 +49,7 @@ class OrdersController < ApplicationController
   end
 
   def order_params
-    params.require(:order_form).permit(:postcode, :prefecture_id, :city, :block, :building, :phone_number).merge(
+    params.require(:order).permit(:postcode, :prefecture_id, :city, :block, :building, :phone_number).merge(
       token: params[:token],
       user_id: current_user.id,
       item_id: params[:item_id]
