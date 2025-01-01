@@ -26,7 +26,6 @@ class OrderForm
       block: block,
       building: building,
       phone_number: phone_number
-      # order_id: order.id
     }
   end
 end
