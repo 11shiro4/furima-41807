@@ -33,7 +33,7 @@
     </div>
     <%# /支払額の表示 %>
 
-    <%= form_with model: @order, url: item_orders_path(@item), id: 'charge-form', class: 'card-form', local: true do |f| %>
+    <%= form_with model: @order_form, url: item_orders_path(@item), id: 'charge-form', class: 'card-form', local: true do |f| %>
     <%= render 'shared/error_messages', model: @order_form %>	
     <%# カード情報の入力 %>
     <div class='credit-card-form'>
